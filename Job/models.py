@@ -7,6 +7,7 @@ JOB_TYPE = [
     ('Part Time','Part Time'),
 ]
 class Job(models.Model):
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     job_type = models.CharField(max_length=20,choices = JOB_TYPE, blank=True, null=True)
     descripion = models.TextField(max_length=800,blank=True, null=True)
@@ -21,5 +22,20 @@ class Job(models.Model):
         verbose_name="job"
         verbose_name_plural="jobs"
     
-    def __srt__(self):
+    def __str__(self):
         return self.title
+
+    
+    
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    
+    class Meta:
+        db_table="category"
+        verbose_name = ('Category')
+        verbose_name_plural = ("Categories")
+
+    def __str__(self):
+        return self.name
+
+    
